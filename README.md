@@ -1,7 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+A tic-tac-toe webapp played in hotseat mode. 
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+Given two players seated at the same computer who want to play tic-tac-toe
+with each other, the webapp will: 
+- only allow legal moves (according to the official [rules](https://en.wikipedia.org/wiki/Tic-tac-toe#Rules) for the game)
+- preview move on mouseover
+- switch from one player to the other automatically
+- determine end of game situations: draw or win/lose on either side
+- reset the board when the game is finished (next first player is previous looser)
+- keep score over multiple games
+- reset score
+
+## Store model
+
+The application model state will include the following information:
+
+```
+{
+  board: Array of 9 values containing the state for each of the cells on the board
+  players: Array of 2 strings, representing the names of the players
+  currentPlayer: index of the player currently setting a piece on the board
+  score: Array of 3 values: matches won by each of the players and draws
+}
+```
+### Example
+
+Alice is playing against Bob. They've already played 6 matches: 
+Alice won twice, Bob once, and they had 3 draws. Now it's Alice's turn, and the 
+board looks like this:
+
+```
+ x |   | 0
+-----------
+ x |   | 
+-----------
+   |   |  
+```
+
+The store object will look like this:
+
+```
+{
+  'board': [1, -1, 0, 1, -1, -1, -1, -1, -1],
+  'players': ['Alice', 'Bob'], 
+  'currentPlayer': 0,
+  'score': [2, 1, 3] 
+}
+```
 
 ## Table of Contents
 
@@ -60,7 +104,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
 - [Troubleshooting](#troubleshooting)
   - [`npm test` hangs on macOS Sierra](#npm-test-hangs-on-macos-sierra)
   - [`npm run build` silently fails](#npm-run-build-silently-fails)
-- [Something Missing?](#something-missing)
+- [MIT License](#mit-license)
 
 ## Updating to New Releases
 
@@ -1239,6 +1283,19 @@ There are also reports that *uninstalling* Watchman fixes the issue. So if nothi
 
 It is reported that `npm run build` can fail on machines with no swap space, which is common in cloud environments. If [the symptoms are matching](https://github.com/facebookincubator/create-react-app/issues/1133#issuecomment-264612171), consider adding some swap space to the machine you’re building on, or build the project locally.
 
-## Something Missing?
+## MIT License
 
-If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/packages/react-scripts/template/README.md)
+The MIT License (MIT)
+Copyright (c) <2016> <Camelia Smeria>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## Misc
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+
+You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
