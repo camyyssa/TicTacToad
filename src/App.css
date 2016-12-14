@@ -1,3 +1,9 @@
+/* Pondy color theme: 
+light blue: #D6DAFA
+dark blue: #8D98DB
+dark green: #2C965A
+ */
+
 .App {
   text-align: center;
 }
@@ -8,10 +14,15 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: #8D98DB;
+  height: 180px;
   padding: 20px;
   color: white;
+}
+
+.App-description {
+  margin: 10px;
+  font-size: 12px;
 }
 
 .App-intro {

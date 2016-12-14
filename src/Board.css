@@ -1,0 +1,13 @@
+.Board {
+  margin: 40px Auto;
+  width: 306px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Board-cell {
+  height: 100px;
+  width: 100px;
+  background-color: #D6DAFA;
+  border: 1px solid #8D98DB;
+}
