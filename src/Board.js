@@ -5,18 +5,27 @@ class Board extends Component {
   constructor(props) {
     super(props);
 
-    this.rows = [1, -1, 0, 1, -1, -1, -1, -1, -1];
-    this.cellClicked = this.cellClicked.bind(this);
+    this.state = {
+      rows: [1, -1, 0, 1, -1, -1, -1, -1, -1]
+    };
+    this.onCellClick = this.onCellClick.bind(this);
     this.renderCell = this.renderCell.bind(this);
   }
 
-  cellClicked(key) {
-    console.log(`Something here ${key}`);
+  onCellClick(key) {
+    console.log(`Clicked ${key}`);
   }
 
   renderCell(val, i) {
+    // Prepare classes that this cell should have
+    let classList = ['Board-cell'];
+    if (this.state.rows[i] !== 1) {
+      classList.push(`Board-${i}`);
+    };
+    let classes = classList.join(' ');
+
     return (
-      <div key={i} className="Board-cell" onClick={this.cellClicked.bind(this, i)}>
+      <div key={i} className={classes} onClick={this.onCellClick.bind(this, i)}>
       </div>
     );
   }
@@ -24,7 +33,7 @@ class Board extends Component {
   render() {
     return (
       <div className="Board">
-        {this.rows.map((val, i) => this.renderCell(val, i))}
+        {this.state.rows.map((val, i) => this.renderCell(val, i))}
       </div>
     );
   }

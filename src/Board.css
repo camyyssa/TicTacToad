@@ -8,6 +8,15 @@
 .Board-cell {
   height: 100px;
   width: 100px;
-  background-color: #D6DAFA;
-  border: 1px solid #8D98DB;
+  background-color: hsl(233, 78%, 98%);
+  border: 1px solid hsl(232, 52%, 71%);
+  cursor: pointer;
+}
+
+.Board-0 {
+  background-color: hotpink;
+}
+
+.Board-x {
+  background-color: seagreen;
 }
