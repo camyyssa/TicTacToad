@@ -1,42 +1,47 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import './Board.css';
 
-class Board extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      rows: [1, -1, 0, 1, -1, -1, -1, -1, -1]
-    };
-    this.onCellClick = this.onCellClick.bind(this);
-    this.renderCell = this.renderCell.bind(this);
-  }
-
-  onCellClick(key) {
-    console.log(`Clicked ${key}`);
-  }
-
-  renderCell(val, i) {
-    // Prepare classes that this cell should have
-    let classList = ['Board-cell'];
-    if (this.state.rows[i] !== 1) {
-      classList.push(`Board-${i}`);
-    };
-    let classes = classList.join(' ');
-
-    return (
-      <div key={i} className={classes} onClick={this.onCellClick.bind(this, i)}>
-      </div>
-    );
-  }
-
-  render() {
-    return (
-      <div className="Board">
-        {this.state.rows.map((val, i) => this.renderCell(val, i))}
-      </div>
-    );
+function cellStateToCSSClass(s) {
+  if (s === 0) {
+    return '0';
+  } else if (s === 1) {
+    return 'x';
   }
 }
+
+function onCellClick(key) {
+  console.log(key);
+}
+
+function renderCell(board, val, i) {
+  // Prepare classes that this cell should have
+  let classList = ['Board-cell'];
+  if (board[i] !== -1) {
+    classList.push(`Board-${cellStateToCSSClass(board[i])}`);
+  };
+  let classes = classList.join(' ');
+
+  return (
+    <div key={i} className={classes} onClick={onCellClick.bind(null, i)}>
+    </div>
+  );
+}
+
+function mapStateToProps(state) {
+  return { board: state.board };
+}
+
+let Board = ({ board, dispatch }) => {
+  return (
+    <div className="Board">
+      {board.map((val, i) => renderCell(board, val, i))}
+    </div>
+  );
+};
+
+Board = connect(
+  mapStateToProps
+)(Board);
 
 export default Board;
