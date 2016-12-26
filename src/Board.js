@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { markCell } from './Actions';
 import './Board.css';
 
 function cellStateToCSSClass(s) {
@@ -10,11 +11,7 @@ function cellStateToCSSClass(s) {
   }
 }
 
-function onCellClick(key) {
-  console.log(key);
-}
-
-function renderCell(board, val, i) {
+function renderCell(board, i, onCellClick) {
   // Prepare classes that this cell should have
   let classList = ['Board-cell'];
   if (board[i] !== -1) {
@@ -23,25 +20,31 @@ function renderCell(board, val, i) {
   let classes = classList.join(' ');
 
   return (
-    <div key={i} className={classes} onClick={onCellClick.bind(null, i)}>
+    <div key={i} className={classes} onClick={() => onCellClick(i)}>
     </div>
   );
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   return { board: state.board };
-}
+};
 
-let Board = ({ board, dispatch }) => {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCellClick: (i) => {
+      dispatch(markCell(i));
+    }
+  };
+};
+
+let Board = ({ board, onCellClick }) => {
   return (
     <div className="Board">
-      {board.map((val, i) => renderCell(board, val, i))}
+      {board.map((val, i) => renderCell(board, i, onCellClick))}
     </div>
   );
 };
 
-Board = connect(
-  mapStateToProps
-)(Board);
+Board = connect(mapStateToProps, mapDispatchToProps)(Board);
 
 export default Board;
