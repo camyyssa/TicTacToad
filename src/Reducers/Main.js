@@ -5,6 +5,9 @@ const initialState = {
   score: [0, 0, 0]
 };
 
+/**
+ * Get a deep copy of the previous state. 
+*/
 const copyState = (prevState) => {
   return {
     board: prevState.board.slice(),
@@ -14,7 +17,25 @@ const copyState = (prevState) => {
   };
 };
 
-export function reducer(prevState = initialState, action) {
+/**
+ * Resets the board array to a clean state. 
+ * In-place: Does not return a new state object 
+ */
+const resetBoard = (state) => {
+  state.board = new Array(9).fill(-1);
+  return state;
+};
+
+/**
+ * Switches between the two players. 
+ * In-place: Does not return a new state object
+ */
+const switchPlayer = (state) => {
+  state.currentPlayer = (state.currentPlayer + 1) % 2;
+  return state;
+};
+
+export function reducers(prevState = initialState, action) {
   switch (action.type) {
   case 'MARK_CELL':
     const pos = action.position;
@@ -22,7 +43,7 @@ export function reducer(prevState = initialState, action) {
     if (prevState.board[pos] === -1) {
       const state = copyState(prevState); 
       state.board[pos] = val;
-      state.currentPlayer = (state.currentPlayer + 1) % 2;
+      switchPlayer(state);
       return state;
     }
     return prevState;
