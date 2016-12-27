@@ -1,15 +1,6 @@
 import { copyState, cleanBoard } from './Common';
 
 /**
- * Resets the board array to a clean state. 
- * In-place: Does not return a new state object 
- */
-const resetBoard = (state) => {
-  state.board = cleanBoard;
-  return state;
-};
-
-/**
  * Switches between the two players. 
  * In-place: Does not return a new state object
  */
@@ -19,19 +10,10 @@ const switchPlayer = (state) => {
 };
 
 /**
- * Set one of the two players as the next. 
- * In-place: Does not return a new state object
- */
-const setPlayer = (player, state) => {
-  state.currentPlayer = player;
-  return state;
-};
-
-/**
  * Constants defining the current state of the board: whether it's still
  * open (no), whether someone won (x or zero) of whether it's a draw
  */
-export const winnerCodes = {
+const winnerCodes = {
   noWinner: -1,
   x: 0,
   zero: 1,
@@ -40,9 +22,9 @@ export const winnerCodes = {
 
 /**
  * The list of positions on the board that need to contain the same symbol 
- * in order for one player to win the game
+ * in order for one of the players to win the game
  */
-const winningPositions = [
+const winningLines = [
   [0, 1, 2], 
   [3, 4, 5], 
   [6, 7, 8], 
@@ -57,27 +39,33 @@ const winningPositions = [
  * Given a list of indices on the board, determines whether the values
  * present there are equal
  */
-const arePositionsEqual = (positions, board) => {
-  if ( board[positions[0]] > 0
-   && board[positions[0]] === board[positions[1]] 
-   && board[positions[1]] === board[positions[2]]) {
+const checkLine = (line, board) => {
+  if ( board[line[0]] > 0
+   && board[line[0]] === board[line[1]] 
+   && board[line[1]] === board[line[2]]) {
     return true;
   };
   return false;
 };
 
-export const checkFinal = (board) => { 
+/**
+ * Determines whether our current board is in a winning state or a draw, and
+ * returns a code accordingly
+ */
+const getBoardStateCode = (board) => { 
   let winner = -1;
-  winningPositions.forEach((positions) => {
-    if (arePositionsEqual(positions, board)) {
-      winner = board[positions[0]] === 1 ? winnerCodes.x : winnerCodes.y;
+  winningLines.forEach((line) => {
+    if (checkLine(line, board)) {
+      winner = board[line[0]] === 1 ? winnerCodes.x : winnerCodes.y;
     }
   });
 
+  // Do we have a winner?
   if (winner > -1) {
     return winner;
   }
 
+  // Are we in a draw situation?
   if (board.indexOf(-1) < 0) {
     return winnerCodes.draw;
   }
@@ -85,7 +73,35 @@ export const checkFinal = (board) => {
   return winnerCodes.noWinner;
 };
 
-export function boardReducers(prevState = initialState, action) {
+/**
+ * Given the state (whether a player won or if it's a draw) of our board after a 
+ * move, updates the state. 
+ * In-place: Does not return a new state object
+ */
+const updateState = (state) => {
+  switch (getBoardStateCode(state.board)) {
+  case winnerCodes.x: {
+    state.score[0] += 1;
+    state.board = cleanBoard;
+    return state;
+  }
+  case winnerCodes.zero: {
+    state.score[1] += 1;
+    state.board = cleanBoard;
+    return state;
+  }
+  case winnerCodes.draw: {
+    state.score[2] += 1;
+    state.board = cleanBoard;
+    return state;
+  }
+  default: 
+    switchPlayer(state);
+    return state;
+  };
+};
+
+export function boardReducers(prevState, action) {
   switch (action.type) {
   case 'MARK_CELL': {
     const pos = action.position;
@@ -93,27 +109,7 @@ export function boardReducers(prevState = initialState, action) {
     if (prevState.board[pos] === -1) {
       const state = copyState(prevState); 
       state.board[pos] = val;
-      let finalState = checkFinal(state.board);
-      switch (finalState) {
-      case winnerCodes.x: {
-        state.score[0] += 1;
-        state.board = cleanBoard;
-        return state;
-      }
-      case winnerCodes.zero: {
-        state.score[1] += 1;
-        state.board = cleanBoard;
-        return state;
-      }
-      case winnerCodes.draw: {
-        state.score[2] += 1;
-        state.board = cleanBoard;
-        return state;
-      }
-      default: 
-        switchPlayer(state);
-        return state;
-      };
+      return updateState(state);
     }
     return prevState;
   }
