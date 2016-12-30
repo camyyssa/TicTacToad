@@ -4,7 +4,10 @@ import { setPlayerName } from './Actions';
 import './Players.css';
 
 const mapStateToProps = (state) => {
-  return { players: state.players };
+  return { 
+    players: state.players,
+    currentPlayer: state.currentPlayer
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -15,22 +18,37 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const displayPlayer = (val, i, updatePlayer) => {
+const displayPlayer = (opt, updatePlayer) => {
+  let classList = ['Players-input', 'Players-input-active'];
+  if (opt.isTheirTurn) {
+    classList.push('Players-current-player');
+  }
+  let classes = classList.join(' ');
+
   return (
-    <div key={i} className="Players-name">
+    <div key={opt.index} className='Players-name'>
       <input 
-        className="Players-input Players-input-active" 
-        value={val}
-        onChange={(event) => updatePlayer(i, event.target.value)} 
+        className={classes}
+        value={opt.value}
+        onChange={(event) => updatePlayer(opt.index, event.target.value)} 
         type='text' />
     </div> 
   );
 };
 
-let Players = ({ players, updatePlayer }) => {
+let Players = ({ players, currentPlayer, updatePlayer }) => {
+  const playerTrees = players.map((val, i) => { 
+    const options = {
+      value: val,
+      index: i,
+      isTheirTurn: i === currentPlayer
+    };
+    return displayPlayer(options, updatePlayer);
+  });
+
   return (
     <div className="Players">
-      {displayPlayer(players[0], 0, updatePlayer)}
+      {playerTrees[0]}
       <div className='Players-name'>
         <input 
           className="Players-input Players-input-disabled" 
@@ -38,7 +56,7 @@ let Players = ({ players, updatePlayer }) => {
           readOnly='readOnly' 
           type='text' />
       </div>
-      {displayPlayer(players[1], 1, updatePlayer)}      
+      {playerTrees[1]}      
     </div>
   );
 };

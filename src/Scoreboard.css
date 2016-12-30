@@ -1,0 +1,10 @@
+.Score-entry {
+  width: 180px;
+  display: inline-block;
+  margin: 7px;
+}
+
+.Score-draw {
+  color: hsl(0, 0%, 65%);
+  width: 80px;
+}

@@ -6,7 +6,6 @@
   display: inline-block;
   margin: 5px;
   height: 30px;
-  width: 180px;
 }
 
 .Players-input {
@@ -16,14 +15,21 @@
   text-align: center;
   border: none;
   margin: 2px;
+  width: 180px;
 }
 
 .Players-input-disabled {
-  color: hsl(0, 0%, 75%);
+  color: hsl(0, 0%, 65%);
+  width: 80px;
 }
 
 .Players-input-active:hover {
   margin: 0;
   border: 2px solid hsl(232, 52%, 82%);
   border-radius: 4px;
+}
+
+.Players-current-player {
+  font-weight: bold;
+  color: #2C965A;
 }

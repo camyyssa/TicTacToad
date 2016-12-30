@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Board from './Board';
 import Players from './Players';
+import Scoreboard from './Scoreboard';
 import './App.css';
 
 class App extends Component {
@@ -15,9 +16,7 @@ class App extends Component {
         </div>
         <Board />
         <Players />
-        <p className="App-intro">
-          Scoreboard comes here
-        </p>
+        <Scoreboard />
       </div>
     );
   }
