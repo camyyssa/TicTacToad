@@ -13,7 +13,7 @@ const switchPlayer = (state) => {
  * Constants defining the current state of the board: whether it's still
  * open (no), whether someone won (x or zero) of whether it's a draw
  */
-const winnerCodes = {
+export const winnerCodes = {
   noWinner: -1,
   x: 0,
   zero: 1,
@@ -39,8 +39,8 @@ const winningLines = [
  * Given a list of indices on the board, determines whether the values
  * present there are equal
  */
-const checkLine = (line, board) => {
-  if ( board[line[0]] > 0
+export const checkLine = (line, board) => {
+  if ( board[line[0]] > -1
    && board[line[0]] === board[line[1]] 
    && board[line[1]] === board[line[2]]) {
     return true;
@@ -52,11 +52,11 @@ const checkLine = (line, board) => {
  * Determines whether our current board is in a winning state or a draw, and
  * returns a code accordingly
  */
-const getBoardStateCode = (board) => { 
+export const getBoardStateCode = (board) => { 
   let winner = -1;
   winningLines.forEach((line) => {
     if (checkLine(line, board)) {
-      winner = board[line[0]] === 1 ? winnerCodes.x : winnerCodes.y;
+      winner = board[line[0]] === 1 ? winnerCodes.x : winnerCodes.zero;
     }
   });
 
@@ -80,6 +80,10 @@ const getBoardStateCode = (board) => {
  */
 const updateState = (state) => {
   switch (getBoardStateCode(state.board)) {
+  case winnerCodes.noWinner: {
+    switchPlayer(state);
+    return state;
+  }
   case winnerCodes.x: {
     state.score[0] += 1;
     state.board = cleanBoard;
@@ -96,9 +100,8 @@ const updateState = (state) => {
     return state;
   }
   default: 
-    switchPlayer(state);
-    return state;
-  };
+    throw new Error('Unexpected state: ' + state.toString());
+  }
 };
 
 export function boardReducers(prevState, action) {
@@ -118,7 +121,8 @@ export function boardReducers(prevState, action) {
     state.board = cleanBoard;
     return state;
   }
-  default:
+  default: {
     return prevState; 
+  }
   }
 };

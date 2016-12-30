@@ -11,12 +11,24 @@
   background-color: hsl(233, 78%, 98%);
   border: 1px solid hsl(232, 52%, 71%);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .Board-0 {
-  background-color: hotpink;
+  background-color: hsl(240, 52%, 98%);
 }
 
 .Board-x {
-  background-color: seagreen;
+  background-color: hsl(220, 52%, 98%);
+}
+
+.Board-marker {
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 3em;
+  font-weight: 700;
+  color: hsl(232, 52%, 71%);
 }

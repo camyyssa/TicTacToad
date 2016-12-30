@@ -19,8 +19,16 @@ function renderCell(board, i, onCellClick) {
   };
   let classes = classList.join(' ');
 
+  let content = '';
+  if (board[i] === 1) {
+    content = (<i className="fa fa-times fa-4x Board-marker"></i>);
+  } else if (board[i] === 0) {
+    content = (<i className="fa fa-circle-o fa-4x Board-marker"></i>);    
+  }
+
   return (
     <div key={i} className={classes} onClick={() => onCellClick(i)}>
+      {content}
     </div>
   );
 }
