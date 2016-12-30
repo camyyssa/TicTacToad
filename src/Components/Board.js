@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { markCell } from './Actions';
+import { markCell } from '../Actions';
 import './Board.css';
 
 function cellStateToCSSClass(s) {

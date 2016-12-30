@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setPlayerName } from './Actions';
+import { setPlayerName } from '../Actions';
 import './Players.css';
 
 const mapStateToProps = (state) => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Board from './Board';
-import Players from './Players';
-import Scoreboard from './Scoreboard';
+import Board from './Components/Board';
+import Players from './Components/Players';
+import Scoreboard from './Components/Scoreboard';
 import './App.css';
 
 class App extends Component {
