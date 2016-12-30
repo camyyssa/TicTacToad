@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Board from './Board.js';
+import Board from './Board';
+import Players from './Players';
 import './App.css';
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
         </div>
         </div>
         <Board />
+        <Players />
         <p className="App-intro">
           Scoreboard comes here
         </p>

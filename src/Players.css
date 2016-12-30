@@ -1,0 +1,29 @@
+.Players {
+  margin-top: 20px;
+}
+
+.Players-name {
+  display: inline-block;
+  margin: 5px;
+  height: 30px;
+  width: 180px;
+}
+
+.Players-input {
+  font-size: 1.2em;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  border: none;
+  margin: 2px;
+}
+
+.Players-input-disabled {
+  color: hsl(0, 0%, 75%);
+}
+
+.Players-input-active:hover {
+  margin: 0;
+  border: 2px solid hsl(232, 52%, 82%);
+  border-radius: 4px;
+}
