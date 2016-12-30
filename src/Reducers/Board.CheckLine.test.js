@@ -1,6 +1,6 @@
 import { checkLine } from './Board';
 
-describe.only('checkLine function', () => {
+describe('checkLine function', () => {
   it('Doesn\'t respond to -1s', () => {
     let line = [0, 1, 2];
     let board = [-1, -1, -1];

@@ -2,7 +2,7 @@ import * as Actions from '../Actions';
 import { copyState } from './Common';
 import { boardReducers } from './Board';
 
-describe.skip('Board markers in non final conditions', () => {
+describe('Board markers in non final conditions', () => {
   it('Ignores cell change request when cell is occupied by 1', () => {
     const prevState = {
       board: [1, -1, -1, -1, -1, -1, -1, -1, -1], 
@@ -168,7 +168,6 @@ describe('Board in final conditions', () => {
     }; 
 
     const nextState = boardReducers(prevState, Actions.markCell(7));
-    console.log(nextState.board);
     
     expect(nextState.score).toEqual([0, 1, 0]);
     expect(nextState.board).toEqual(new Array(9).fill(-1));
@@ -178,7 +177,7 @@ describe('Board in final conditions', () => {
     const prevState = {
       board: [0, 1, 0, 0, -1, -1, -1, 1, -1], 
       players: ['P1', 'P2'],
-      currentPlayer: 0, 
+      currentPlayer: 1, 
       score: [0, 0, 0]
     }; 
 
@@ -192,7 +191,7 @@ describe('Board in final conditions', () => {
     const prevState = {
       board: [1, 1, 0, -1, -1, 1, 0, -1, -1], 
       players: ['P1', 'P2'],
-      currentPlayer: 0, 
+      currentPlayer: 1, 
       score: [0, 0, 0]
     }; 
 
@@ -206,7 +205,7 @@ describe('Board in final conditions', () => {
     const prevState = {
       board: [1, 0, 1, 1, 1, 0, 0, 1, -1], 
       players: ['P1', 'P2'],
-      currentPlayer: 0, 
+      currentPlayer: 1, 
       score: [0, 0, 0]
     }; 
 
