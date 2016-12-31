@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { markCell } from '../Actions';
 import './Board.css';
 
+const fishImage = require('../../assets/fish.png');
+const toadImage = require('../../assets/toad.png');
+
 function cellStateToCSSClass(s) {
   if (s === 0) {
     return '0';
@@ -21,9 +24,9 @@ function renderCell(board, i, onCellClick) {
 
   let content = '';
   if (board[i] === 1) {
-    content = (<i className="fa fa-times fa-4x Board-marker"></i>);
+    content = (<img src={toadImage} alt='froggy' className='Board-marker'></img>);
   } else if (board[i] === 0) {
-    content = (<i className="fa fa-circle-o fa-4x Board-marker"></i>);    
+    content = (<img src={fishImage} alt='fishy' className='Board-marker'></img>);    
   }
 
   return (

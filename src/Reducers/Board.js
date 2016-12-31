@@ -1,4 +1,5 @@
 import { copyState, cleanBoard } from './Common';
+import { winnerCodes } from '../Common';
 
 /**
  * Switches between the two players. 
@@ -7,17 +8,6 @@ import { copyState, cleanBoard } from './Common';
 const switchPlayer = (state) => {
   state.currentPlayer = (state.currentPlayer + 1) % 2;
   return state;
-};
-
-/**
- * Constants defining the current state of the board: whether it's still
- * open (no), whether someone won (x or zero) of whether it's a draw
- */
-export const winnerCodes = {
-  noWinner: -1,
-  x: 0,
-  zero: 1,
-  draw: 2
 };
 
 /**
@@ -82,21 +72,25 @@ const updateState = (state) => {
   switch (getBoardStateCode(state.board)) {
   case winnerCodes.noWinner: {
     switchPlayer(state);
+    state.announceWinner = winnerCodes.noWinner;
     return state;
   }
   case winnerCodes.x: {
     state.score[0] += 1;
     state.board = cleanBoard;
+    state.announceWinner = winnerCodes.x;
     return state;
   }
   case winnerCodes.zero: {
     state.score[1] += 1;
     state.board = cleanBoard;
+    state.announceWinner = winnerCodes.zero;
     return state;
   }
   case winnerCodes.draw: {
     state.score[2] += 1;
     state.board = cleanBoard;
+    state.announceWinner = winnerCodes.draw;
     return state;
   }
   default: 

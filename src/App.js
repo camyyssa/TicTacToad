@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Board from './Components/Board';
 import Players from './Components/Players';
 import Scoreboard from './Components/Scoreboard';
+import WinnerScreen from './Components/WinnerScreen';
 import './App.css';
 
 class App extends Component {
@@ -13,11 +14,12 @@ class App extends Component {
         <div className="App-description">
           Who will achieve pond domination?
         </div>
-        </div>
-        <Board />
-        <Players />
-        <Scoreboard />
       </div>
+      <Board />
+      <Players />
+      <Scoreboard />
+      <WinnerScreen />
+    </div>
     );
   }
 }

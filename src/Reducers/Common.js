@@ -6,7 +6,8 @@ export const copyState = (prevState) => {
     board: prevState.board.slice(),
     players: prevState.players.slice(),
     currentPlayer: prevState.currentPlayer,
-    score: prevState.score.slice()
+    score: prevState.score.slice(),
+    announceWinner: prevState.announceWinner
   };
 };
 

@@ -1,4 +1,5 @@
-import { getBoardStateCode, winnerCodes } from './Board';
+import { getBoardStateCode } from './Board';
+import { winnerCodes } from '../Common';
 
 describe('getBoardStateCode()', () => {
   it('identifies a draw', () => {

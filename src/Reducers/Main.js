@@ -5,7 +5,8 @@ const initialState = {
   board: new Array(9).fill(-1), 
   players: ['Player 1', 'Player 2'],
   currentPlayer: 0, 
-  score: [0, 0, 0]
+  score: [0, 0, 0],
+  announceWinner: -1
 };
 
 export function reducers(prevState = initialState, action) {
