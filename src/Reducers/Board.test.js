@@ -8,7 +8,8 @@ describe('Board markers in non final conditions', () => {
       board: [1, -1, -1, -1, -1, -1, -1, -1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 1, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextStateAfter1 = boardReducers(prevState, Actions.markCell(0));
@@ -20,7 +21,8 @@ describe('Board markers in non final conditions', () => {
       board: [-1, 0, -1, -1, -1, -1, -1, -1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 0, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextStateAfter0 = boardReducers(prevState, Actions.markCell(1));
@@ -32,7 +34,8 @@ describe('Board markers in non final conditions', () => {
       board: [-1, -1, -1, -1, -1, -1, -1, -1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 0, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextState = boardReducers(prevState, Actions.markCell(0));
@@ -44,7 +47,8 @@ describe('Board markers in non final conditions', () => {
       board: [-1, -1, -1, -1, -1, -1, -1, -1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 1, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextState = boardReducers(prevState, Actions.markCell(0));
@@ -56,7 +60,8 @@ describe('Board markers in non final conditions', () => {
       board: [-1, -1, -1, -1, -1, -1, -1, -1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 0, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextState1 = boardReducers(prevState, Actions.markCell(0));
@@ -68,7 +73,8 @@ describe('Board markers in non final conditions', () => {
       board: [0, 1, -1, -1, -1, -1, -1, -1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 0, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextState1 = boardReducers(prevState, Actions.markCell(0));
@@ -83,7 +89,8 @@ describe('Board markers in non final conditions', () => {
       board: [-1, -1, -1, -1, -1, -1, -1, -1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 0, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextState1 = boardReducers(prevState, Actions.markCell(0));
@@ -109,7 +116,8 @@ describe('Board in final conditions', () => {
       board: [1, 0, 1, 0, 1, -1, -1, -1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 0, 
-      score: [2, 3, 5]
+      score: [2, 3, 5],
+      announceWinner: -1
     };
 
     const nextState = boardReducers(prevState, Actions.resetBoard());
@@ -122,13 +130,13 @@ describe('Board in final conditions', () => {
       board: [0, 0, -1, 1, -1, 1, -1, -1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 0, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextState = boardReducers(prevState, Actions.markCell(4));
     
-    expect(nextState.score).toEqual([1, 0, 0]);
-    expect(nextState.board).toEqual(new Array(9).fill(-1));
+    expect(nextState.announceWinner).toEqual(0);
   });
 
   it('Detects x wins on column', () => {
@@ -136,13 +144,13 @@ describe('Board in final conditions', () => {
       board: [0, 1, -1, 0, 1, -1, -1, -1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 0, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextState = boardReducers(prevState, Actions.markCell(7));
     
-    expect(nextState.score).toEqual([1, 0, 0]);
-    expect(nextState.board).toEqual(new Array(9).fill(-1));
+    expect(nextState.announceWinner).toEqual(0);
   });
 
   it('Detects x wins on diagonal', () => {
@@ -150,13 +158,13 @@ describe('Board in final conditions', () => {
       board: [1, 0, -1, 0, 1, -1, -1, -1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 0, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextState = boardReducers(prevState, Actions.markCell(8));
-
-    expect(nextState.score).toEqual([1, 0, 0]);
-    expect(nextState.board).toEqual(new Array(9).fill(-1));
+    
+    expect(nextState.announceWinner).toEqual(0);
   });
 
   it('Detects 0 wins on row', () => {
@@ -164,13 +172,13 @@ describe('Board in final conditions', () => {
       board: [-1, -1, 1, 1, -1, -1, 0, -1, 0], 
       players: ['P1', 'P2'],
       currentPlayer: 1, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextState = boardReducers(prevState, Actions.markCell(7));
     
-    expect(nextState.score).toEqual([0, 1, 0]);
-    expect(nextState.board).toEqual(new Array(9).fill(-1));
+    expect(nextState.announceWinner).toEqual(1);
   });
 
   it('Detects 0 wins on column', () => {
@@ -178,13 +186,13 @@ describe('Board in final conditions', () => {
       board: [0, 1, 0, 0, -1, -1, -1, 1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 1, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextState = boardReducers(prevState, Actions.markCell(6));
     
-    expect(nextState.score).toEqual([0, 1, 0]);
-    expect(nextState.board).toEqual(new Array(9).fill(-1));
+    expect(nextState.announceWinner).toEqual(1);
   });
 
   it('Detects 0 wins on diagonal', () => {
@@ -192,13 +200,13 @@ describe('Board in final conditions', () => {
       board: [1, 1, 0, -1, -1, 1, 0, -1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 1, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextState = boardReducers(prevState, Actions.markCell(4));
-
-    expect(nextState.score).toEqual([0, 1, 0]);
-    expect(nextState.board).toEqual(new Array(9).fill(-1));
+    
+    expect(nextState.announceWinner).toEqual(1);
   });
 
   it('Detects a draw', () => {
@@ -206,12 +214,12 @@ describe('Board in final conditions', () => {
       board: [1, 0, 1, 1, 1, 0, 0, 1, -1], 
       players: ['P1', 'P2'],
       currentPlayer: 1, 
-      score: [0, 0, 0]
+      score: [0, 0, 0],
+      announceWinner: -1
     }; 
 
     const nextState = boardReducers(prevState, Actions.markCell(8));
-
-    expect(nextState.score).toEqual([0, 0, 1]);
-    expect(nextState.board).toEqual(new Array(9).fill(-1));
+    
+    expect(nextState.announceWinner).toEqual(2);
   });
 });

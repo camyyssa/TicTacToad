@@ -6,11 +6,16 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
   pointer-events: none;
 }
 
+.WinnerScreen-active {
+  pointer-events: all;
+  background-color: hsla(0, 0%, 10%, 0.3);
+}
+
 .WinnerScreen-notification {
+  margin-top: 40px;
   font-size: 2em;
   background-color: hsl(232, 52%, 71%);
   border: 7px solid hsl(232, 52%, 90%);
@@ -25,7 +30,7 @@
 
 .WinnerScreen-show-enter.WinnerScreen-show-enter-active {
   opacity: 1;
-  transition: 700ms;
+  transition: 1000ms;
 }
 
 .WinnerScreen-show-leave {

@@ -34,7 +34,7 @@ function renderCell(board, i, onCellClick) {
     <div key={i} className={classes} onClick={() => onCellClick(i)}>
       <ReactCSSTransitionGroup 
         transitionName="Board-marker-place" 
-        transitionEnterTimeout={700} 
+        transitionEnterTimeout={500} 
         transitionLeaveTimeout={700}>
         {content}
       </ReactCSSTransitionGroup>

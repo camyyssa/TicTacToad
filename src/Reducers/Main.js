@@ -13,6 +13,8 @@ export function reducers(prevState = initialState, action) {
   switch (action.type) {
   case 'MARK_CELL':
     return boardReducers(prevState, action);
+  case 'EXIT_WINNER_STATE':
+    return boardReducers(prevState, action);
   case 'SET_PLAYER_NAME': {
     const state = copyState(prevState);
     state.players[action.index] = action.value;

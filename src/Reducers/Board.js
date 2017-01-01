@@ -69,33 +69,15 @@ export const getBoardStateCode = (board) => {
  * In-place: Does not return a new state object
  */
 const updateState = (state) => {
-  switch (getBoardStateCode(state.board)) {
-  case winnerCodes.noWinner: {
+  const stateCode = getBoardStateCode(state.board); 
+  if (stateCode === winnerCodes.noWinner) {
     switchPlayer(state);
     state.announceWinner = winnerCodes.noWinner;
     return state;
-  }
-  case winnerCodes.x: {
-    state.score[0] += 1;
-    state.board = cleanBoard;
-    state.announceWinner = winnerCodes.x;
-    return state;
-  }
-  case winnerCodes.zero: {
-    state.score[1] += 1;
-    state.board = cleanBoard;
-    state.announceWinner = winnerCodes.zero;
-    return state;
-  }
-  case winnerCodes.draw: {
-    state.score[2] += 1;
-    state.board = cleanBoard;
-    state.announceWinner = winnerCodes.draw;
-    return state;
-  }
-  default: 
-    throw new Error('Unexpected state: ' + state.toString());
-  }
+  } 
+  
+  state.announceWinner = stateCode;
+  return state; 
 };
 
 export function boardReducers(prevState, action) {
@@ -109,6 +91,13 @@ export function boardReducers(prevState, action) {
       return updateState(state);
     }
     return prevState;
+  }
+  case 'EXIT_WINNER_STATE': {
+    const state = copyState(prevState);
+    state.score[state.announceWinner] += 1;
+    state.board = cleanBoard;
+    state.announceWinner = winnerCodes.noWinner;
+    return state;
   }
   case 'RESET_BOARD': {
     const state = copyState(prevState);

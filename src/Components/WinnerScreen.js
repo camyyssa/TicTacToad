@@ -2,6 +2,7 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { winnerCodes } from '../Common';
+import { exitWinnerState } from '../Actions';
 import './WinnerScreen.css';
 
 const mapStateToProps = (state) => {
@@ -11,7 +12,21 @@ const mapStateToProps = (state) => {
   };
 };
 
-let WinnerScreen = ({ winnerIndex, players }) => {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onClick: () => {
+      console.log('Background was clicked');
+      dispatch(exitWinnerState());
+    }
+  };
+};
+
+let WinnerScreen = ({ winnerIndex, players, onClick }) => {
+  const classes = ['WinnerScreen'];
+  if (winnerIndex > -1) {
+    classes.push('WinnerScreen-active');
+  }
+
   let content = '';
   if (winnerIndex !== winnerCodes.noWinner) {
     let text = '';
@@ -28,10 +43,10 @@ let WinnerScreen = ({ winnerIndex, players }) => {
       </div>);
   }
   return (
-    <div className='WinnerScreen'>
+    <div className={classes.join(' ')} onClick={() => onClick()}>
       <ReactCSSTransitionGroup 
         transitionName='WinnerScreen-show'
-        transitionEnterTimeout={700}
+        transitionEnterTimeout={1000}
         transitionLeaveTimeout={700}>
         {content}
       </ReactCSSTransitionGroup>       
@@ -39,6 +54,6 @@ let WinnerScreen = ({ winnerIndex, players }) => {
   );
 };
 
-WinnerScreen = connect(mapStateToProps)(WinnerScreen);
+WinnerScreen = connect(mapStateToProps, mapDispatchToProps)(WinnerScreen);
 
 export default WinnerScreen;

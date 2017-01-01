@@ -41,7 +41,7 @@
 .Board-marker-place-enter.Board-marker-place-enter-active {
   opacity: 1;
   width: 100px;
-  transition: 700ms;
+  transition: 500ms;
 }
 
 .Board-marker-place-leave {
