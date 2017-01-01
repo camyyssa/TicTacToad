@@ -19,6 +19,7 @@
   width: 180px;
   background: none;
   color: hsl(60, 32%, 80%);
+  font-family: inherit;
 }
 
 .Players-input-disabled {

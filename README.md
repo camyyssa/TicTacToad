@@ -49,6 +49,11 @@ The application model state will include the following information:
   players: Array of 2 strings, representing the names of the players
   currentPlayer: index of the player currently setting a piece on the board
   score: Array of 3 values: matches won by each of the players and draws
+  announceWinner: A numeric value determining whether the board is in a winner
+     state or not. Codes used are
+        -1 = no one won
+        0, 1 = the index of the winner
+        2 = the game is a draw
 }
 ```
 ### Example
@@ -72,7 +77,8 @@ The store object will look like this:
   'board': [1, -1, 0, 1, -1, -1, -1, -1, -1],
   'players': ['Alice', 'Bob'], 
   'currentPlayer': 0,
-  'score': [2, 1, 3] 
+  'score': [2, 1, 3],
+  'announceWinner': -1
 }
 ```
 
@@ -130,3 +136,9 @@ implementation.
 |
 +-- README.md --> this readme file
 ```
+
+## Demo
+
+The latest version of the app is available on Heroku at
+
+    > https://tictactoad.herokuapp.com/
