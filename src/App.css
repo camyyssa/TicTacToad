@@ -1,7 +1,7 @@
 /* Pondy color theme: 
 light blue: hsl(233, 78%, 98%)
 dark blue: hsl(232, 52%, 71%)
-dark green: hsl(146, 55%, 38%)
+dark green: hsl(107, 18%, 50%);
  */
 
 .App {
@@ -14,6 +14,22 @@ dark green: hsl(146, 55%, 38%)
   padding: 30px;
   border-bottom: 7px solid hsl(232, 52%, 90%);
   color: white;
+}
+
+.App-body {    
+  background-size: 600px 500px;
+  background-repeat: no-repeat;
+  background-position: center top;    
+  margin: 40px 0;
+  height: 100%;
+}
+
+.App-background {
+  position: absolute;
+  background-color: hsl(107, 18%, 50%);
+  height: 100%;
+  width: 100%;
+  z-index: -1;
 }
 
 .App-description {

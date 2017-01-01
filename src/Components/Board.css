@@ -1,27 +1,19 @@
 .Board {
-  margin: 40px Auto;
+  margin: Auto;
   width: 306px;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  
+  padding-top: 110px;
 }
 
 .Board-cell {
   height: 100px;
   width: 100px;
-  background-color: hsl(233, 78%, 98%);
   border: 1px solid hsl(232, 52%, 71%);
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.Board-0 {
-  background-color: hsl(240, 52%, 98%);
-}
-
-.Board-x {
-  background-color: hsl(220, 52%, 98%);
 }
 
 .Board-marker {

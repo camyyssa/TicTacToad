@@ -5,21 +5,29 @@ import Scoreboard from './Components/Scoreboard';
 import WinnerScreen from './Components/WinnerScreen';
 import './App.css';
 
+const pondBackground = require('../assets/pond.png');
+
 class App extends Component {
   render() {
+    const style = {
+      backgroundImage: 'url(' + pondBackground + ')'
+    };
     return (
-      <div className="App">
-        <div className="App-header">
+      <div className='App'>
+        <div className='App-background'></div>
+        <div className='App-header'>
           <h2>Tic Tac Toad</h2>
-        <div className="App-description">
-          Who will achieve pond domination?
+          <div className='App-description'>
+            Who will achieve pond domination?
+          </div>
         </div>
+        <div className='App-body' style={style}>
+          <Board />
+          <Players />
+          <Scoreboard />
+        </div>
+        <WinnerScreen />
       </div>
-      <Board />
-      <Players />
-      <Scoreboard />
-      <WinnerScreen />
-    </div>
     );
   }
 }
