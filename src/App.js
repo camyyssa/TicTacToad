@@ -16,7 +16,7 @@ class App extends Component {
       <div className='App'>
         <div className='App-background'></div>
         <div className='App-header'>
-          <h2>Tic Tac Toad</h2>
+          <h1>Tic Tac Toad</h1>
           <div className='App-description'>
             Who will achieve pond domination?
           </div>

@@ -6,8 +6,11 @@ import './Board.css';
 
 const fishImage = require('../../assets/fish.png');
 const toadImage = require('../../assets/toad.png');
-const splishSound = require('../../assets/splish.mp3');
-const ribbitSound = require('../../assets/ribbit.mp3');
+const splishAsset = require('../../assets/splish.mp3');
+const ribbitAsset = require('../../assets/ribbit.mp3');
+
+const splishSound = new Audio(splishAsset);
+const ribbitSound = new Audio(ribbitAsset);
 
 function cellStateToCSSClass(s) {
   if (s === 0) {
@@ -54,14 +57,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onCellClick: (i, player) => {
-      let audio;
+      
       if (player === 0) {
-        audio = new Audio(ribbitSound);
+        setTimeout(() => {ribbitSound.play();}, 150);
       } else {
-        audio = new Audio(splishSound);
+        setTimeout(() => {splishSound.play();}, 150);
       }
 
-      setTimeout(() => {audio.play();}, 150);
       dispatch(markCell(i));
     }
   };

@@ -7,14 +7,23 @@ light green: hsl(60, 32%, 82%)
 
 .App {
   text-align: center;
+  font-family: 'Arima Madurai', cursive;
+  color: white;
 }
 
 .App-header {
-  background-color: hsl(199, 36%, 39%);
-  height: 100px;
   padding: 30px;
+  height: 100px;
   border-bottom: 7px solid hsl(60, 32%, 82%);
-  color: white;
+  background-color: hsl(199, 36%, 39%);
+}
+
+.App-header>h1 {
+  margin: 10px;
+}
+
+.App-description {
+  margin: 10px;
 }
 
 .App-body {    
@@ -31,18 +40,4 @@ light green: hsl(60, 32%, 82%)
   height: 100%;
   width: 100%;
   z-index: -1;
-}
-
-.App-description {
-  margin: 10px;
-  font-size: 12px;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }

@@ -3,6 +3,7 @@
   display: inline-block;
   margin: 7px;
   color: hsl(60, 32%, 80%);
+  font-family: 'Arima Madurai', cursive;
 }
 
 .Score-draw {
