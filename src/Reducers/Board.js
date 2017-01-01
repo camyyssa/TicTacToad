@@ -93,6 +93,10 @@ export function boardReducers(prevState, action) {
     return prevState;
   }
   case 'EXIT_WINNER_STATE': {
+    if (prevState.announceWinner < 0) {
+      return prevState;
+    }
+    
     const state = copyState(prevState);
     state.score[state.announceWinner] += 1;
     state.board = cleanBoard;

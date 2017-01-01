@@ -8,9 +8,8 @@ with each other, the webapp will:
 - preview move on mouseover
 - switch from one player to the other automatically
 - determine end of game situations: draw or win/lose on either side
-- reset the board when the game is finished (next first player is previous looser)
+- reset the board when the game is finished
 - keep score over multiple games
-- reset score
 
 ## Running and installing the project
 

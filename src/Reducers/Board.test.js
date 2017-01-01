@@ -108,9 +108,7 @@ describe('Board markers in non final conditions', () => {
     const nextState4 = boardReducers(prevState, Actions.markCell(4));
     expect(nextState4.currentPlayer).toEqual(0);
   });
-});
 
-describe('Board in final conditions', () => {
   it('Resets the board', () => {
     const prevState = {
       board: [1, 0, 1, 0, 1, -1, -1, -1, -1], 
@@ -124,7 +122,9 @@ describe('Board in final conditions', () => {
 
     expect(nextState.board).toEqual(new Array(9).fill(-1));
   });
+});
 
+describe('Board in final conditions', () => {
   it('Detects x wins on row', () => {
     const prevState = {
       board: [0, 0, -1, 1, -1, 1, -1, -1, -1], 
@@ -221,5 +221,83 @@ describe('Board in final conditions', () => {
     const nextState = boardReducers(prevState, Actions.markCell(8));
     
     expect(nextState.announceWinner).toEqual(2);
+  });
+});
+
+describe('Exiting winner state', () => {
+  it('Does nothing if we are not in a winning state', () => {
+    const prevState = {
+      board: [1, 0, 1, 1, 1, 0, 0, 1, -1], 
+      players: ['P1', 'P2'],
+      currentPlayer: 1, 
+      score: [0, 0, 0],
+      announceWinner: -1
+    };
+
+    const nextState = boardReducers(prevState, Actions.exitWinnerState());
+
+    expect(nextState.announceWinner).toEqual(prevState.announceWinner);
+    expect(nextState.board).toEqual(prevState.board);
+    expect(nextState.score).toEqual(prevState.score);
+  });
+
+  it('Cleans the board', () => {
+    const prevState = {
+      board: [1, 0, 1, 1, 1, 0, 0, 1, -1], 
+      players: ['P1', 'P2'],
+      currentPlayer: 1, 
+      score: [0, 0, 0],
+      announceWinner: 0
+    };
+
+    const nextState = boardReducers(prevState, Actions.exitWinnerState());
+
+    expect(nextState.announceWinner).toEqual(-1);
+    expect(nextState.board).toEqual(new Array(9).fill(-1));
+  });
+
+  it('Updates player 1 when they win', () => {
+    const prevState = {
+      board: [1, 0, 1, 1, 1, 0, 0, 1, -1], 
+      players: ['P1', 'P2'],
+      currentPlayer: 1, 
+      score: [0, 0, 0],
+      announceWinner: 0
+    };
+
+    const nextState = boardReducers(prevState, Actions.exitWinnerState());
+
+    expect(nextState.announceWinner).toEqual(-1);
+    expect(nextState.score).toEqual([1, 0, 0]);
+  });
+
+  it('Updates player 2 when they win', () => {
+    const prevState = {
+      board: [1, 0, 1, 1, 1, 0, 0, 1, -1], 
+      players: ['P1', 'P2'],
+      currentPlayer: 1, 
+      score: [0, 0, 0],
+      announceWinner: 1
+    };
+
+    const nextState = boardReducers(prevState, Actions.exitWinnerState());
+
+    expect(nextState.announceWinner).toEqual(-1);
+    expect(nextState.score).toEqual([0, 1, 0]);
+  });
+
+  it('Updates draw score on draw', () => {
+    const prevState = {
+      board: [1, 0, 1, 1, 1, 0, 0, 1, -1], 
+      players: ['P1', 'P2'],
+      currentPlayer: 1, 
+      score: [0, 0, 0],
+      announceWinner: 2
+    };
+
+    const nextState = boardReducers(prevState, Actions.exitWinnerState());
+
+    expect(nextState.announceWinner).toEqual(-1);
+    expect(nextState.score).toEqual([0, 0, 1]);
   });
 });

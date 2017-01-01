@@ -13,10 +13,6 @@ export const exitWinnerState = () => ({
   type: 'EXIT_WINNER_STATE'
 });
 
-export const resetScore = () => ({
-  type: 'RESET_SCORE'
-});
-
 export const resetBoard = () => ({
   type: 'RESET_BOARD'
 });
