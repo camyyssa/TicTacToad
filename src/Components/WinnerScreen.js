@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { winnerCodes } from '../Common';
 import './WinnerScreen.css';
@@ -11,23 +12,29 @@ const mapStateToProps = (state) => {
 };
 
 let WinnerScreen = ({ winnerIndex, players }) => {
-  if (winnerIndex === winnerCodes.noWinner) {
-    return (<div style={{display: 'none'}}></div>);
-  }
-
-  let text = '';
-  if (winnerIndex === winnerCodes.x || winnerIndex === winnerCodes.zero) {
-    text += `Yay! ${players[winnerIndex]} won!`;
-  } else if (winnerIndex === winnerCodes.draw) {
-    text += 'A draw! Shall we match again?';
-  } else {
-    text += 'Hmmmm.... something weird just happened';
+  let content = '';
+  if (winnerIndex !== winnerCodes.noWinner) {
+    let text = '';
+    if (winnerIndex === winnerCodes.x || winnerIndex === winnerCodes.zero) {
+      text += `Yay! ${players[winnerIndex]} won!`;
+    } else if (winnerIndex === winnerCodes.draw) {
+      text += 'A draw! Shall we match again?';
+    } else {
+      text += 'Hmmmm.... something weird just happened';
+    }
+    content = (
+      <div className='WinnerScreen-notification'>
+        {text}
+      </div>);
   }
   return (
     <div className='WinnerScreen'>
-      <div className='WinnerScreen-notification'>
-        {text}
-      </div>       
+      <ReactCSSTransitionGroup 
+        transitionName='WinnerScreen-show'
+        transitionEnterTimeout={700}
+        transitionLeaveTimeout={700}>
+        {content}
+      </ReactCSSTransitionGroup>       
     </div>
   );
 };

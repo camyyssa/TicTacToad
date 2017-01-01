@@ -12,6 +12,7 @@ dark green: hsl(146, 55%, 38%)
   background-color: #8D98DB;
   height: 100px;
   padding: 30px;
+  border-bottom: 7px solid hsl(232, 52%, 90%);
   color: white;
 }
 

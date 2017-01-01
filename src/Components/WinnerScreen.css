@@ -13,8 +13,26 @@
 .WinnerScreen-notification {
   font-size: 2em;
   background-color: hsl(232, 52%, 71%);
-  border: 1px solid hsl(232, 52%, 71%);
+  border: 7px solid hsl(232, 52%, 90%);
   color: white;
   border-radius: 5px;
   padding: 50px;
+}
+
+.WinnerScreen-show-enter {
+  opacity: 0.01;
+}
+
+.WinnerScreen-show-enter.WinnerScreen-show-enter-active {
+  opacity: 1;
+  transition: 700ms;
+}
+
+.WinnerScreen-show-leave {
+  opacity: 1;
+}
+
+.WinnerScreen-show-leave.WinnerScreen-show-leave-active {
+  opacity: 0.01;
+  transition: 700ms;
 }

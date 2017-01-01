@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { markCell } from '../Actions';
 import './Board.css';
@@ -31,7 +32,12 @@ function renderCell(board, i, onCellClick) {
 
   return (
     <div key={i} className={classes} onClick={() => onCellClick(i)}>
-      {content}
+      <ReactCSSTransitionGroup 
+        transitionName="Board-marker-place" 
+        transitionEnterTimeout={700} 
+        transitionLeaveTimeout={700}>
+        {content}
+      </ReactCSSTransitionGroup>
     </div>
   );
 }
