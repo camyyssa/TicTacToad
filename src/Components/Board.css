@@ -1,6 +1,6 @@
 .Board {
   margin: Auto;
-  width: 306px;
+  width: 312px;
   display: flex;
   flex-wrap: wrap;  
   padding-top: 110px;
@@ -9,7 +9,8 @@
 .Board-cell {
   height: 100px;
   width: 100px;
-  border: 1px solid hsl(232, 52%, 71%);
+  margin: 2px;
+  background: hsla(0, 0%, 0%, 0.3);
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -22,7 +23,6 @@
   vertical-align: middle;
   font-size: 3em;
   font-weight: 700;
-  color: hsl(232, 52%, 71%);
 }
 
 .Board-marker-place-enter {
