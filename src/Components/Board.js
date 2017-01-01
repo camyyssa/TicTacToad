@@ -6,6 +6,8 @@ import './Board.css';
 
 const fishImage = require('../../assets/fish.png');
 const toadImage = require('../../assets/toad.png');
+const splishSound = require('../../assets/splish.mp3');
+const ribbitSound = require('../../assets/ribbit.mp3');
 
 function cellStateToCSSClass(s) {
   if (s === 0) {
@@ -15,7 +17,7 @@ function cellStateToCSSClass(s) {
   }
 }
 
-function renderCell(board, i, onCellClick) {
+function renderCell(board, i, player, onCellClick) {
   // Prepare classes that this cell should have
   let classList = ['Board-cell'];
   if (board[i] !== -1) {
@@ -31,7 +33,7 @@ function renderCell(board, i, onCellClick) {
   }
 
   return (
-    <div key={i} className={classes} onClick={() => onCellClick(i)}>
+    <div key={i} className={classes} onClick={() => onCellClick(i, player)}>
       <ReactCSSTransitionGroup 
         transitionName="Board-marker-place" 
         transitionEnterTimeout={500} 
@@ -43,21 +45,32 @@ function renderCell(board, i, onCellClick) {
 }
 
 const mapStateToProps = (state) => {
-  return { board: state.board };
+  return { 
+    board: state.board,
+    player: state.currentPlayer 
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onCellClick: (i) => {
+    onCellClick: (i, player) => {
+      let audio;
+      if (player === 0) {
+        audio = new Audio(ribbitSound);
+      } else {
+        audio = new Audio(splishSound);
+      }
+
+      setTimeout(() => {audio.play();}, 150);
       dispatch(markCell(i));
     }
   };
 };
 
-let Board = ({ board, onCellClick }) => {
+let Board = ({ board, player, onCellClick }) => {
   return (
     <div className="Board">
-      {board.map((val, i) => renderCell(board, i, onCellClick))}
+      {board.map((val, i) => renderCell(board, i, player, onCellClick))}
     </div>
   );
 };

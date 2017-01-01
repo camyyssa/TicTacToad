@@ -3,7 +3,7 @@ import { copyState } from './Common';
 
 const initialState = {
   board: new Array(9).fill(-1), 
-  players: ['Player 1', 'Player 2'],
+  players: ['Froggy', 'Fishy'],
   currentPlayer: 0, 
   score: [0, 0, 0],
   announceWinner: -1

@@ -5,6 +5,9 @@ import { winnerCodes } from '../Common';
 import { exitWinnerState } from '../Actions';
 import './WinnerScreen.css';
 
+const tadaSound = require('../../assets/tada.mp3');
+const drawSound = require('../../assets/draw.mp3');
+
 const mapStateToProps = (state) => {
   return { 
     winnerIndex: state.announceWinner,
@@ -15,7 +18,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onClick: () => {
-      console.log('Background was clicked');
       dispatch(exitWinnerState());
     }
   };
@@ -25,6 +27,14 @@ let WinnerScreen = ({ winnerIndex, players, onClick }) => {
   const classes = ['WinnerScreen'];
   if (winnerIndex > -1) {
     classes.push('WinnerScreen-active');
+
+    let audio;
+    if (winnerIndex < 2) {
+      audio = new Audio(tadaSound);
+    } else {
+      audio = new Audio(drawSound);
+    }
+    setTimeout(() => {audio.play();}, 150);
   }
 
   let content = '';
