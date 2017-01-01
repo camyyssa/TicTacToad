@@ -14,7 +14,6 @@ class App extends Component {
     };
     return (
       <div className='App'>
-        <div className='App-background'></div>
         <div className='App-header'>
           <h1>Tic Tac Toad</h1>
           <div className='App-description'>
