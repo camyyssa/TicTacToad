@@ -17,6 +17,10 @@
   align-items: center;
 }
 
+.Board-cell:hover {
+  background: hsla(0, 0%, 0%, 0.5);
+}
+
 .Board-marker {
   width: 100%;
   display: inline-block;
